@@ -52,20 +52,12 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
-        //super.configure(http);
-        /*.cors().and()*/
+
         http.csrf().disable()
                 .exceptionHandling().authenticationEntryPoint(authEntryPointJwt).and()
                 .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS).and()
                 .authorizeRequests().antMatchers("/register", "/login").permitAll()
                 .anyRequest().authenticated();
-
-        //WHY ?
-        //http.csrf().and().cors().disable()
-        //        .exceptionHandling().authenticationEntryPoint(authEntryPointJwt).and()
-        //        .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS).and()
-        //        .antMatcher("/ecommerse/api/register").antMatcher("/ecommerse/api/login");
-
 
         http.addFilterBefore(authenticationJwtTokenFilter(), UsernamePasswordAuthenticationFilter.class);
     }
@@ -73,9 +65,9 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     @Override
     public void configure(WebSecurity web) throws Exception {
         //super.configure(web); // en son ayarlayacagiz
-        web.ignoring().antMatchers();
-        /*("/swagger-ui.html", "/v2/api-docs", "/configuration/**",
-                "/swagger-resources/**", "/webjars/**", "/api-docs/**"); */
+        web.ignoring().antMatchers
+        ("/swagger-ui.html", "/v2/api-docs", "/configuration/**",
+                "/swagger-resources/**", "/webjars/**", "/api-docs/**");
     }
 
 }
