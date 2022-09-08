@@ -21,9 +21,21 @@ spring:
         dialect: org.hibernate.dialect.MySQL5Dialect
         format_sql: true
     show-sql: true
+  mail:
+    host: smtp.gmail.com
+    port: 587
+    username: suleymantm11@gmail.com
+    password: ovbreewitpettqrt
+    properties:
+      mail:
+        smtp:
+          auth: true
+          starttls:
+            enable: true
+
 
 
 backendapi:
   app:
     jwtSecret: eCommerseSecretKey
-    jwtExpirationMs: 7200000
+    jwtExpirationMs: 1800000

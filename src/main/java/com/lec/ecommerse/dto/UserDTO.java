@@ -53,6 +53,8 @@ public class UserDTO {
 
     private Boolean builtIn;
 
+    private Boolean enabled = false;
+
     private Set<String> roles;
 
     public UserDTO(String firstName, String lastName, String phoneNumber, String email,

@@ -44,9 +44,19 @@ public class UserController {
         userService.register(user);
 
         Map<String, Boolean> map = new HashMap<>();
-        map.put("User register successfully!", true);
+        map.put("User register successfully! Confirm your mail!", true);
 
         return new ResponseEntity<>(map, HttpStatus.CREATED);
+    }
+
+    @GetMapping("/confirm")
+    public ResponseEntity<Map<String,Boolean>> ConfirmEmail(@RequestParam("token") String token,
+                                                            @RequestParam("date") String date){
+        userService.confirmUser(token, date);
+
+        Map<String, Boolean> map = new HashMap<>();
+        map.put("Email verified successfully !", true);
+        return new ResponseEntity<>(map, HttpStatus.OK);
     }
 
     @PostMapping("/login")
