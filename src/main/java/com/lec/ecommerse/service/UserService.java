@@ -55,50 +55,55 @@ public class UserService {
 
     public void register(User user) throws BadRequestException {
 
+        if (userRepository.existsByEmail(user.getEmail())) {
+            User user1 = userRepository.findByEmail(user.getEmail()).get();
+            if (user1.getEnabled()) {
+                throw new ConflictException("Error: Email is already in use!");
+            }
+        }
+
+        if (!userRepository.existsByEmail(user.getEmail())) {
+
+            String encodedPassword = passwordEncoder.encode(user.getPassword());
+            user.setPassword(encodedPassword);
+
+            Set<Role> roles = new HashSet<>();
+            Role customerRole = roleRepository.findByName(UserRole.ROLE_CUSTOMER)
+                    .orElseThrow(() -> new ResourceNotFoundException("Error: Role is not found."));
+
+            roles.add(customerRole);
+            user.setRoles(roles);
+
+            userRepository.save(user);
+        }
+
+        Long id = userRepository.getById(user.getId()).getId();
+
         String token = UUID.randomUUID().toString();
         DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern("dd-MM-yyyy-HH-mm-ss");
         String currentTime = dateTimeFormatter.format(LocalDateTime.now());
-        String link = "http://localhost:8080/ecommerse/api/confirm?token=" + token + "&date=" + currentTime;
+        String link = "http://localhost:8080/ecommerse/api/confirm?token=" + token + "" +
+                "&id=" + user.getId() + "&date=" + currentTime;
 
-        if (userRepository.existsByEmail(user.getEmail())) {
-            if (user.getEnabled()){
-                throw new ConflictException("Error: Email is already in use!");
-            } else {
-                emailService.send(user.getEmail(), buildEmail(user.getFirstName(), link));
-                throw new ConflictException("Error: Please confirm your email, confirmation mail sent to you!");
-            }
-        } else {
+        if (userRepository.existsByEmail(user.getEmail()) && !user.getEnabled()) {
             emailService.send(user.getEmail(), buildEmail(user.getFirstName(), link));
-
         }
-
-        String encodedPassword = passwordEncoder.encode(user.getPassword());
-        user.setPassword(encodedPassword);
-
-        Set<Role> roles = new HashSet<>();
-        Role customerRole = roleRepository.findByName(UserRole.ROLE_CUSTOMER)
-                .orElseThrow(() -> new ResourceNotFoundException("Error: Role is not found."));
-
-        roles.add(customerRole);
-        user.setRoles(roles);
-
-        userRepository.save(user);
     }
 
-    public void confirmUser(String token, String data) {
+    public void confirmUser(String token, String id, String date) {
         DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern("dd-MM-yyyy-HH-mm-ss");
-        LocalDateTime parseTime = LocalDateTime.parse(data, dateTimeFormatter);
+        LocalDateTime parseTime = LocalDateTime.parse(date, dateTimeFormatter);
 
-
-        if (parseTime.isBefore(LocalDateTime.now().minusMinutes(5))){
+        if (parseTime.isBefore(LocalDateTime.now().minusMinutes(5))) {
             throw new DateTimeException("Token has expired");
         }
-        //if (!token.equals()){
-        //    throw new AuthException("Token has changed");
-        //}
+        if (!userRepository.existsById(Long.valueOf(id))) {
+            throw new IllegalStateException("Invalid credentials!");
+        }
 
-        //userRepository
-
+        User user = userRepository.findById(Long.valueOf(id)).get();
+        user.setEnabled(true);
+        userRepository.save(user);
 
     }
 
