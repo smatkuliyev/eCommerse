@@ -77,8 +77,6 @@ public class UserService {
             userRepository.save(user);
         }
 
-        Long id = userRepository.getById(user.getId()).getId();
-
         String token = UUID.randomUUID().toString();
         DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern("dd-MM-yyyy-HH-mm-ss");
         String currentTime = dateTimeFormatter.format(LocalDateTime.now());
