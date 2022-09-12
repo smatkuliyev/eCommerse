@@ -24,10 +24,7 @@ import org.springframework.stereotype.Service;
 import java.time.DateTimeException;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
-import java.util.HashSet;
-import java.util.Optional;
-import java.util.Set;
-import java.util.UUID;
+import java.util.*;
 
 @AllArgsConstructor
 @Service
@@ -38,8 +35,22 @@ public class UserService {
     private final PasswordEncoder passwordEncoder;
     private final static String USER_NOT_FOUND_MSG = "user with id %d not found";
     private final EmailService emailService;
-    public AuthenticationManager authenticationManager;
-    public JwtUtils jwtUtils;
+
+    public List<UserDTO> fetchAllUsers(){
+        List<User> users = userRepository.findAllBy();
+        List<UserDTO> userDTOList = new ArrayList<>();
+
+        UserDTO userDTO = new UserDTO();
+
+        for (User user: users) {
+            userDTO.setRoles(user.getRoles());
+            userDTOList.add(new UserDTO(user.getFirstName(), user.getLastName(),
+                    user.getPhoneNumber(), user.getEmail(), user.getAddress(),
+                    user.getZipCode(), user.getBuiltIn(), user.getEnabled(), userDTO.getRoles()));
+        }
+
+        return userDTOList;
+    }
 
     public UserDTO findById(Long id) throws ResourceNotFoundException {
         User user = userRepository.findById(id)
@@ -50,7 +61,7 @@ public class UserService {
 
         return new UserDTO(user.getFirstName(), user.getLastName(),
                 user.getPhoneNumber(), user.getEmail(), user.getAddress(),
-                user.getZipCode(), user.getBuiltIn(), userDTO.getRoles());
+                user.getZipCode(), user.getBuiltIn(), user.getEnabled(), userDTO.getRoles());
     }
 
     public void register(User user) throws BadRequestException {

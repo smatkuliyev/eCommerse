@@ -53,12 +53,12 @@ public class UserDTO {
 
     private Boolean builtIn;
 
-    private Boolean enabled = false;
+    private Boolean enabled;
 
     private Set<String> roles;
 
     public UserDTO(String firstName, String lastName, String phoneNumber, String email,
-                   String address, String zipCode, Boolean builtIn, Set<String> roles) {
+                   String address, String zipCode, Boolean builtIn, Boolean enabled, Set<String> roles) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.phoneNumber = phoneNumber;
@@ -66,6 +66,7 @@ public class UserDTO {
         this.address = address;
         this.zipCode = zipCode;
         this.builtIn = builtIn;
+        this.enabled = enabled;
         this.roles = roles;
     }
 

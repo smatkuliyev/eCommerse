@@ -19,6 +19,7 @@ import javax.validation.Valid;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 @AllArgsConstructor
@@ -30,6 +31,20 @@ public class UserController {
     public UserService userService;
     public AuthenticationManager authenticationManager;
     public JwtUtils jwtUtils;
+
+    @GetMapping("/user/auth/all")
+    @PreAuthorize("hasRole('ADMIN')")
+    public ResponseEntity<List<UserDTO>> getAllUsers(){
+        List<UserDTO> userDTOS = userService.fetchAllUsers();
+        return new ResponseEntity<>(userDTOS, HttpStatus.OK);
+    }
+
+    @GetMapping("/user/{id}/auth")
+    @PreAuthorize("hasRole('ADMIN')")
+    public ResponseEntity<UserDTO> getUserByIdAdmin(@PathVariable Long id) {
+        UserDTO userDTO = userService.findById(id);
+        return new ResponseEntity<>(userDTO, HttpStatus.OK);
+    }
 
     @GetMapping("/user")
     @PreAuthorize("hasRole('CUSTOMER') or hasRole('ADMIN')")
