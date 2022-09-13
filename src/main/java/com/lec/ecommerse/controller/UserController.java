@@ -1,7 +1,9 @@
 package com.lec.ecommerse.controller;
 
 import com.lec.ecommerse.domain.User;
+import com.lec.ecommerse.dto.AdminDTO;
 import com.lec.ecommerse.dto.UserDTO;
+import com.lec.ecommerse.exception.BadRequestException;
 import com.lec.ecommerse.security.jwt.JwtUtils;
 import com.lec.ecommerse.service.UserService;
 import lombok.AllArgsConstructor;
@@ -122,4 +124,23 @@ public class UserController {
         return new ResponseEntity<>(map, HttpStatus.OK);
     }
 
+    @PutMapping("/user/{id}/auth")
+    @PreAuthorize("hasRole('ADMIN')")
+    public ResponseEntity<Map<String, Boolean>> updateUserAuth(@PathVariable Long id,
+                                                               @Valid @RequestBody AdminDTO adminDTO) {
+        userService.updateUserAuth(id, adminDTO);
+        Map<String, Boolean> map = new HashMap<>();
+        map.put("success", true);
+
+        return new ResponseEntity<>(map, HttpStatus.OK);
+    }
+
+    @DeleteMapping("/user/{id}/auth")
+    @PreAuthorize("hasRole('ADMIN')")
+    public ResponseEntity<Map<String, Boolean>> deleteUser(@PathVariable Long id) {
+        userService.removeById(id);
+        Map<String, Boolean> map = new HashMap<>();
+        map.put("success", true);
+        return new ResponseEntity<>(map, HttpStatus.OK);
+    }
 }

@@ -31,5 +31,5 @@ public interface UserRepository extends JpaRepository<User, Long> {
     void update(Long id, String firstName, String lastName, String phoneNumber, String email, String address,
                 String zipCode) throws BadRequestException;
 
-    List<User> findAllBy();
+    //List<projectUser> findAllBy();
 }
