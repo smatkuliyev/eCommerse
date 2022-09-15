@@ -25,12 +25,11 @@ public class CategoryController {
         categoryService.createCategory(category);
 
         Map<String, Boolean> map = new HashMap<>();
-        map.put("Category has been created successfully!", true);
+        map.put("Category has been added successfully!", true);
         return new ResponseEntity<>(map, HttpStatus.CREATED);
     }
 
     @GetMapping("/list")
-    @PreAuthorize("hasRole('CUSTOMER') or hasRole('ADMIN')")
     public ResponseEntity<List<Category>> listCategory(){
         List<Category> categoryList = categoryService.listCategory();
 
