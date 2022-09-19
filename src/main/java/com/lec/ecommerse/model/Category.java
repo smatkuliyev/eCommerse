@@ -2,6 +2,7 @@ package com.lec.ecommerse.model;
 
 import lombok.Getter;
 import lombok.Setter;
+import lombok.ToString;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
@@ -25,4 +26,9 @@ public class Category {
     @NotNull
     @Column(name = "image_url")
     private String imageUrl;
+
+    @Override
+    public String toString() {
+        return categoryName;
+    }
 }

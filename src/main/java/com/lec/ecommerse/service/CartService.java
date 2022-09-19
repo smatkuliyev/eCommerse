@@ -11,9 +11,7 @@ import com.lec.ecommerse.repository.UserRepository;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
-import java.util.Date;
-import java.util.List;
-import java.util.Optional;
+import java.util.*;
 
 @Service
 @AllArgsConstructor
@@ -46,8 +44,23 @@ public class CartService {
             cart.setCreatedDate(new Date());
             cartRepository.save(cart);
         }
+    }
 
+    public Map<List<CartDTO>, Double> listCart(Long userId) {
+        User user = userRepository.getById(userId);
+        List<Cart> cartList = cartRepository.findAllByUser(user);
 
+        List<CartDTO> cartDTOs = new ArrayList<>();
+        double totalCost = 0;
 
+        for (Cart cart : cartList) {
+            CartDTO cartDto = new CartDTO(cart.getId(), cart.getProduct().getId(), cart.getProduct(), cart.getQuantity());
+            totalCost += cartDto.getQuantity() * cart.getProduct().getPrice();
+            cartDTOs.add(cartDto);
+        }
+
+        Map<List<CartDTO>, Double> map = new HashMap<>();
+        map.put(cartDTOs, totalCost);
+        return map;
     }
 }
