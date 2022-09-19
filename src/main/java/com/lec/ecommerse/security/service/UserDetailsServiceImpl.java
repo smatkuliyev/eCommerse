@@ -1,6 +1,6 @@
 package com.lec.ecommerse.security.service;
 
-import com.lec.ecommerse.domain.User;
+import com.lec.ecommerse.model.User;
 import com.lec.ecommerse.repository.UserRepository;
 import lombok.AllArgsConstructor;
 import org.springframework.security.core.userdetails.UserDetails;

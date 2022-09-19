@@ -1,7 +1,7 @@
 package com.lec.ecommerse.repository;
 
-import com.lec.ecommerse.domain.Role;
-import com.lec.ecommerse.domain.enumeration.UserRole;
+import com.lec.ecommerse.model.Role;
+import com.lec.ecommerse.model.enumeration.UserRole;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 

@@ -1,7 +1,7 @@
 package com.lec.ecommerse.service;
 
-import com.lec.ecommerse.domain.Category;
-import com.lec.ecommerse.domain.Product;
+import com.lec.ecommerse.model.Category;
+import com.lec.ecommerse.model.Product;
 import com.lec.ecommerse.dto.ProductDTO;
 import com.lec.ecommerse.exception.ResourceNotFoundException;
 import com.lec.ecommerse.repository.CategoryRepository;

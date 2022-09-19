@@ -1,8 +1,8 @@
 package com.lec.ecommerse.service;
 
-import com.lec.ecommerse.domain.Product;
-import com.lec.ecommerse.domain.User;
-import com.lec.ecommerse.domain.WishList;
+import com.lec.ecommerse.model.Product;
+import com.lec.ecommerse.model.User;
+import com.lec.ecommerse.model.WishList;
 import com.lec.ecommerse.dto.ProductDTO;
 import com.lec.ecommerse.exception.ResourceNotFoundException;
 import com.lec.ecommerse.repository.ProductRepository;

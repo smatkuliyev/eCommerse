@@ -1,6 +1,5 @@
 package com.lec.ecommerse.controller;
 
-import com.lec.ecommerse.domain.Product;
 import com.lec.ecommerse.dto.ProductDTO;
 import com.lec.ecommerse.service.WishListService;
 import lombok.AllArgsConstructor;

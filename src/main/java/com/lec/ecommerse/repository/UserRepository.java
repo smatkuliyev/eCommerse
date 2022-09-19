@@ -1,7 +1,6 @@
 package com.lec.ecommerse.repository;
 
-import com.lec.ecommerse.domain.User;
-import com.lec.ecommerse.dto.UserDTO;
+import com.lec.ecommerse.model.User;
 import com.lec.ecommerse.exception.BadRequestException;
 import com.lec.ecommerse.exception.ResourceNotFoundException;
 import org.springframework.data.jpa.repository.JpaRepository;
@@ -10,7 +9,6 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.util.List;
 import java.util.Optional;
 
 @Repository

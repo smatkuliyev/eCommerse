@@ -1,7 +1,7 @@
 package com.lec.ecommerse.repository;
 
-import com.lec.ecommerse.domain.User;
-import com.lec.ecommerse.domain.WishList;
+import com.lec.ecommerse.model.User;
+import com.lec.ecommerse.model.WishList;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 

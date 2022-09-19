@@ -1,6 +1,6 @@
 package com.lec.ecommerse.controller;
 
-import com.lec.ecommerse.domain.Category;
+import com.lec.ecommerse.model.Category;
 import com.lec.ecommerse.service.CategoryService;
 import lombok.AllArgsConstructor;
 import org.springframework.http.HttpStatus;

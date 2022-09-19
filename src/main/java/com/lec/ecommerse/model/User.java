@@ -1,4 +1,4 @@
-package com.lec.ecommerse.domain;
+package com.lec.ecommerse.model;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;

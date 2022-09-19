@@ -1,8 +1,8 @@
 package com.lec.ecommerse.service;
 
-import com.lec.ecommerse.domain.Role;
-import com.lec.ecommerse.domain.User;
-import com.lec.ecommerse.domain.enumeration.UserRole;
+import com.lec.ecommerse.model.Role;
+import com.lec.ecommerse.model.User;
+import com.lec.ecommerse.model.enumeration.UserRole;
 import com.lec.ecommerse.dto.AdminDTO;
 import com.lec.ecommerse.dto.UserDTO;
 import com.lec.ecommerse.email.EmailService;
@@ -12,12 +12,7 @@ import com.lec.ecommerse.exception.ConflictException;
 import com.lec.ecommerse.exception.ResourceNotFoundException;
 import com.lec.ecommerse.repository.RoleRepository;
 import com.lec.ecommerse.repository.UserRepository;
-import com.lec.ecommerse.security.jwt.JwtUtils;
 import lombok.AllArgsConstructor;
-import org.springframework.security.authentication.AuthenticationManager;
-import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
-import org.springframework.security.core.Authentication;
-import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.bcrypt.BCrypt;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;

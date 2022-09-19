@@ -1,6 +1,6 @@
-package com.lec.ecommerse.domain;
+package com.lec.ecommerse.model;
 
-import com.lec.ecommerse.domain.enumeration.UserRole;
+import com.lec.ecommerse.model.enumeration.UserRole;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;

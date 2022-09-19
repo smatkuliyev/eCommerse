@@ -1,6 +1,6 @@
 package com.lec.ecommerse.service;
 
-import com.lec.ecommerse.domain.Category;
+import com.lec.ecommerse.model.Category;
 import com.lec.ecommerse.exception.ConflictException;
 import com.lec.ecommerse.exception.ResourceNotFoundException;
 import com.lec.ecommerse.repository.CategoryRepository;

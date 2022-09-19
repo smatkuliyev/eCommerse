@@ -1,7 +1,7 @@
 package com.lec.ecommerse.dto;
 
-import com.lec.ecommerse.domain.Role;
-import com.lec.ecommerse.domain.enumeration.UserRole;
+import com.lec.ecommerse.model.Role;
+import com.lec.ecommerse.model.enumeration.UserRole;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.AllArgsConstructor;
 import lombok.Getter;

@@ -1,6 +1,6 @@
 package com.lec.ecommerse.security.jwt;
 
-import com.lec.ecommerse.domain.User;
+import com.lec.ecommerse.model.User;
 import com.lec.ecommerse.repository.UserRepository;
 import com.lec.ecommerse.security.service.UserDetailsServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;

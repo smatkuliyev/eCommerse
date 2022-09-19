@@ -1,7 +1,7 @@
 package com.lec.ecommerse.security.service;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.lec.ecommerse.domain.User;
+import com.lec.ecommerse.model.User;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;

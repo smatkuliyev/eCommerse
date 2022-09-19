@@ -1,9 +1,8 @@
 package com.lec.ecommerse.controller;
 
-import com.lec.ecommerse.domain.User;
+import com.lec.ecommerse.model.User;
 import com.lec.ecommerse.dto.AdminDTO;
 import com.lec.ecommerse.dto.UserDTO;
-import com.lec.ecommerse.exception.BadRequestException;
 import com.lec.ecommerse.security.jwt.JwtUtils;
 import com.lec.ecommerse.service.UserService;
 import lombok.AllArgsConstructor;
