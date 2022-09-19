@@ -1,6 +1,7 @@
 package com.lec.ecommerse.service;
 
 import com.lec.ecommerse.dto.CartDTO;
+import com.lec.ecommerse.exception.BadRequestException;
 import com.lec.ecommerse.exception.ResourceNotFoundException;
 import com.lec.ecommerse.model.Cart;
 import com.lec.ecommerse.model.Product;
@@ -36,7 +37,7 @@ public class CartService {
             }
         }
         Boolean existsByProduct = cartRepository.existsByProduct(optionalProduct.get());
-        if (!existsByProduct){
+        if (!existsByProduct) {
             Cart cart = new Cart();
             cart.setProduct(optionalProduct.get());
             cart.setUser(user);
@@ -62,5 +63,19 @@ public class CartService {
         Map<List<CartDTO>, Double> map = new HashMap<>();
         map.put(cartDTOs, totalCost);
         return map;
+    }
+
+    public void removeById(Long userId, Integer id) {
+        User user = userRepository.getById(userId);
+        Optional<Cart> optionalCart = cartRepository.findById(id);
+        if (optionalCart.isEmpty()) {
+            throw new ResourceNotFoundException("Item does not exist in Cart");
+        }
+        Cart cart = optionalCart.get();
+        if (cart.getUser() != user) {
+            throw new BadRequestException("Item does not belong to user: " + user.getFirstName());
+        }
+
+        cartRepository.delete(cart);
     }
 }

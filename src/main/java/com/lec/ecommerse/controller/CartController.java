@@ -42,4 +42,15 @@ public class CartController {
 
         return new ResponseEntity<>(map1, HttpStatus.OK);
     }
+
+    @DeleteMapping("/delete/{id}")
+    @PreAuthorize("hasRole('CUSTOMER') or hasRole('ADMIN')")
+    public ResponseEntity<Map<String, Boolean>> deleteProductsFromCart(HttpServletRequest request, @PathVariable Integer id) {
+        Long userId = (Long) request.getAttribute("id");
+        cartService.removeById(userId, id);
+
+        Map<String, Boolean> map = new HashMap<>();
+        map.put("Product has been removed from Cart successfully!", true);
+        return new ResponseEntity<>(map, HttpStatus.OK);
+    }
 }
