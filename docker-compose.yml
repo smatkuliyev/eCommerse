@@ -1,0 +1,44 @@
+version: "3"
+services:
+  server:
+    image: backend
+    container_name: backendApp
+    ports:
+      - "8080:8080"
+    environment:
+      - spring.datasource.url=jdbc:mysql://mysqldb:3306/ecommersedb?useSSL=false
+    restart: always
+    networks:
+      - springmysql-net
+    depends_on:
+      - mysqldb
+
+  mysqldb:
+    image: mysql:5.7
+    container_name: mysqldb
+    networks:
+      - springmysql-net
+    environment:
+      - MYSQL_ROOT_PASSWORD=1234
+      - MYSQL_DATABASE=ecommersedb
+      - MYSQL_USER=sa
+      - MYSQL_PASSWORD=1234
+    ports:
+      - "3307:3306"
+  phpmyadmin:
+    image: phpmyadmin/phpmyadmin
+    container_name: pma
+    networks:
+      - springmysql-net
+    depends_on:
+      - mysqldb
+    environment:
+      PMA_HOST: mysqldb
+      PMA_PORT: 3306
+      PMA_ARBITRARY: 1
+    restart: always
+    ports:
+      - "8081:80"
+
+networks:
+  springmysql-net:
